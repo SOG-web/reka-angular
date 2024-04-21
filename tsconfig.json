@@ -10,6 +10,14 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
+    "paths": {
+      "ngx-reka": [
+        "./dist/ngx-reka"
+      ],
+      "ngx-reka-editor": [
+        "./dist/ngx-reka-editor"
+      ]
+    },
     "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
