@@ -16,6 +16,9 @@
       ],
       "ngx-reka-editor": [
         "./dist/ngx-reka-editor"
+      ],
+      "ngx-reka-parser": [
+        "./dist/ngx-reka-parser"
       ]
     },
     "esModuleInterop": true,

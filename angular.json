@@ -163,6 +163,39 @@
           }
         }
       }
+    },
+    "ngx-reka-parser": {
+      "projectType": "library",
+      "root": "projects/ngx-reka-parser",
+      "sourceRoot": "projects/ngx-reka-parser/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-reka-parser/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-reka-parser/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-reka-parser/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/ngx-reka-parser/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
