@@ -9,7 +9,6 @@ import {onStatusChangeCb, ParserStatus} from "./utils";
 import * as t from '@rekajs/types';
 import {Parser} from "@rekajs/parser";
 import {Reka} from "@rekajs/core";
-import {error} from "ng-packagr/lib/utils/log";
 
 @Component({
   selector: 'ngx-reka-editor',
