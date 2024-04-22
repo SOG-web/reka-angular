@@ -87,7 +87,8 @@
             "index": "projects/web-builder/src/index.html",
             "browser": "projects/web-builder/src/main.ts",
             "polyfills": [
-              "zone.js"
+              "zone.js",
+              "polyfills.ts"
             ],
             "tsConfig": "projects/web-builder/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
