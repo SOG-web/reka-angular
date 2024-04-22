@@ -1,4 +1,12 @@
-import {Component, OnInit, signal, WritableSignal} from '@angular/core';
+import {
+  Component,
+  ComponentFactoryResolver,
+  OnInit,
+  signal,
+  ViewChild,
+  ViewContainerRef,
+  WritableSignal
+} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import * as t from '@rekajs/types';
 import { Reka } from '@rekajs/core';
@@ -24,9 +32,14 @@ const reka = Reka.create();
           <ngx-reka-editor class="w-full h-full text-sm" [reka]="reka()!"/>
         </div>
       </div>
-      <div class="flex-1">
+      <div class="flex-1 flex-col">
         <!--        <Preview />-->
-        {{ samlpeParsedComponent() }}
+        <pre>{{ samlpeParsedComponent() }}</pre>
+
+        <div>
+          <h1>Dynamic Component Rendering</h1>
+          <ng-container #componentContainer></ng-container>
+        </div>
       </div>
     </div>
   `,
@@ -36,9 +49,11 @@ export class AppComponent implements OnInit {
   title = 'web-builder';
   reka = signal<Reka | null>(null);
 
+  @ViewChild('componentContainer', { read: ViewContainerRef, static: true }) componentContainer!: ViewContainerRef;
+
   samlpeParsedComponent  = signal<string>('')
 
-  constructor(public ngxRekaService: NgxRekaService, private ngxRekaParserService: NgxRekaParserService) {
+  constructor(public ngxRekaService: NgxRekaService, private ngxRekaParserService: NgxRekaParserService, private componentFactoryResolver: ComponentFactoryResolver) {
     this.ngxRekaService.setReka(reka);
     this.ngxRekaService.reka$.subscribe({
       next: val => {
@@ -47,13 +62,12 @@ export class AppComponent implements OnInit {
         }
       }
     })
-    sampleAst.components.forEach(component => {
-      this.samlpeParsedComponent.update( (old) =>
-        `${old}\n
-        ${this.ngxRekaParserService.parseComponent(component)}
-        `
-      );
-    })
+    this.samlpeParsedComponent.set(this.ngxRekaParserService.parseComponent(sampleAst.components[0]))
+    if(this.samlpeParsedComponent() !== '') {
+      // @ts-ignore
+      // const factory = this.componentFactoryResolver.resolveComponentFactory(this.samlpeParsedComponent());
+      // this.componentContainer.createComponent(factory);
+    }
   }
 
   ngOnInit(): void {
