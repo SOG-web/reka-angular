@@ -51,7 +51,6 @@ export class NgxRekaEditorComponent implements OnInit, OnDestroy, AfterViewInit 
   ngOnInit() {
     const editorDom = this.editorRef.nativeElement;
     this.currentCodeString.set(Parser.stringify(this.reka.program));
-    console.log(this.reka.program);
     this.currentSate.set(t.Schema.fromJSON(this.reka.program));
     this.codemirrorView = new EditorView({
       state: EditorState.create({
